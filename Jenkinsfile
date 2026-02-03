@@ -8,6 +8,9 @@ pipeline {
     environment {
         COURSE = "Jenkins"
         appVersion = ""
+        ACC_ID = "376798132299"
+        project = "roboshop"
+        component = "catalogue"
     }
     options {
         timeout(time: 10, unit: 'MINUTES') 
@@ -18,9 +21,6 @@ pipeline {
         stage('Read Version') {
             steps {
                 script{
-                //     def packageJSON = readJSON file: 'package.json'
-                //     appVersion = packageJSON.version
-                //     echo "app version: ${appVersion}"
                     def packageJSON = readJSON file: 'package.json'
                     appVersion = packageJSON.version
                     echo "app version: ${appVersion}"
@@ -40,10 +40,13 @@ pipeline {
         stage('Build Image') {
             steps {
                 script{
+                    withAWS(region:'us-east-1',credentials:'aws-creds') {
                         sh """
-                            docker build -t catalogue:${appVersion} .
+                            aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${ACC_ID}.dkr.ecr.us-east-1.amazonaws.com    
+                            docker build 376798132299.dkr.ecr.us-east-1.amazonaws.com/${project}/${component}:${appVersion}
                             docker images
-                        """
+                            docker push ${ACC_ID}.dkr.ecr.us-east-1.amazonaws.com/${project}/${component}:${appVersion}
+                    """
                     }
                 }
             }
