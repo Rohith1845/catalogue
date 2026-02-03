@@ -1,10 +1,10 @@
-FROM node:20-alphine3.22 as build
+FROM node:20.19.5-alpine3.22 as build
 WORKDIR /opt/server
 COPY package.js .
 COPY *.js .
 RUN npm install
 
-FROM node:20.19.5-alphine3.22
+FROM node:20.19.5-alpine3.22
 WORKDIR /opt/server
 RUN addgroup -s roboshop && adduser -s roboshop -g roboshop && \
     chown -R roboshop:roboshop /opt/server
