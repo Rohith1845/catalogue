@@ -26,6 +26,17 @@ pipeline {
                 }
             }   
         }
+        stage('Debug Package JSON') {
+        steps {
+            sh '''
+            pwd
+            ls -l
+            echo "---- package.json content ----"
+            cat package.json
+            '''
+        }
+    }
+
     //     stage('Install Dependencies') {
     //         steps {
     //             script {
