@@ -2,7 +2,7 @@ pipeline {
     // These are pre-build sections
     agent {
         node {
-            label 'AGENT-1'
+            label 'Agent-1'
         }
     }
     environment {
