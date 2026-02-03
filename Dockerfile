@@ -1,4 +1,4 @@
-FROM node:20.19.5-alphine3.22 as build
+FROM node:20-alphine3.22 as build
 WORKDIR /opt/server
 COPY package.js .
 COPY *.js .
