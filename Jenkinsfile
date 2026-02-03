@@ -10,7 +10,7 @@ pipeline {
         appVersion = ""
     }
     options {
-        timeout(time: 10, unit: 'minutes')
+        timeout(time: 10, unit: 'MINUTES')
         disableConcurrentBuilds()
     }
     // This are Build steps
