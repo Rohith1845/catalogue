@@ -26,56 +26,56 @@ pipeline {
                 }
             }   
         }
-        stage('Install Dependencies') {
-            steps {
-                script {
-                    sh """
-                        npm install
-                    """
-                }
-            }
-        }
-        stage('Build Image') {
-            steps {
-                script {
-                    sh """
-                        docker build -t catalogue: ${appVersion} .
-                        docker images
-                    """
-                }
-            }
-        }
-        stage('Test'){
-            steps{
-                script{
-                    sh """
-                        echo "testing"
-                    """
-                }
-            }
-        }
-        stage('Deploy'){
-            steps{
-                script{
-                    sh """
-                        echo "deploying"
-                    """
-                }
+    //     stage('Install Dependencies') {
+    //         steps {
+    //             script {
+    //                 sh """
+    //                     npm install
+    //                 """
+    //             }
+    //         }
+    //     }
+    //     stage('Build Image') {
+    //         steps {
+    //             script {
+    //                 sh """
+    //                     docker build -t catalogue: ${appVersion} .
+    //                     docker images
+    //                 """
+    //             }
+    //         }
+    //     }
+    //     stage('Test'){
+    //         steps{
+    //             script{
+    //                 sh """
+    //                     echo "testing"
+    //                 """
+    //             }
+    //         }
+    //     }
+    //     stage('Deploy'){
+    //         steps{
+    //             script{
+    //                 sh """
+    //                     echo "deploying"
+    //                 """
+    //             }
                 
-            }
-        }
+    //         }
+    //     }
     }
-    // This are post build steps
-    post {
-        always {
-            echo "I'm the end"
-            cleanWs()
-        }
-        success{
-            echo    "Im the success"
-        }
-        failure{
-            echo    "im the failure"
-        }
-    }
+    // // This are post build steps
+    // post {
+    //     always {
+    //         echo "I'm the end"
+    //         cleanWs()
+    //     }
+    //     success{
+    //         echo    "Im the success"
+    //     }
+    //     failure{
+    //         echo    "im the failure"
+    //     }
+    // }
 }
