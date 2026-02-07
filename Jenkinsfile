@@ -6,7 +6,7 @@ def configMap = [
 ]
 
 // if branch is not equal to branch then execute CI
-if ( ! env.BRANCH_NAME.equalsIgnoreCase('main') ){
+if ( ! env.BRANCH_NAME.equalsIgnoreCase('main') ) {
     nodeJSEKSPipeline(configMap)
 }
 else {
