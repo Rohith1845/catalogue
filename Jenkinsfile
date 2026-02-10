@@ -5,11 +5,11 @@ pipeline {
             label 'Agent-1'
         }
     }
-    tools{
-        nodejs 'node20'
-        terraform 'terraform-1.5'
-        dockerTool 'docker-20'
-    }
+    // tools{
+    //     nodejs 'node20'
+    //     terraform 'terraform-1.5'
+    //     dockerTool 'docker-20'
+    // }
     environment {
         COURSE = "Jenkins"
         appVersion = ""
