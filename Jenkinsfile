@@ -32,11 +32,9 @@ pipeline {
                 }
             }
         }
-        stages {
-            stage('Docker Test') {
-                steps {
-                    sh 'docker version'
-                }
+        stage('Docker Test') {
+            steps {
+                sh 'docker version'
             }
         }
 
