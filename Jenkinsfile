@@ -131,7 +131,6 @@ pipeline {
                 script{
                     sh """
                         trivy image \
-                        --scanner vuln \
                         --severity HIGH,CRITICAL,MEDIUM \
                         --exit-code 1 \
                         --skip-db-update \
