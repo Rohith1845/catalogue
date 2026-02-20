@@ -1,0 +1,12 @@
+name: feature-pipeline
+on: [push]
+jobs:
+  feature-pipeline:
+    runs-on: self-hosted
+    steps:
+    - name: call reusable feature pipeline
+      uses: Rohith-rdaws/workflows/.github/workflows/feature-nodejs-pipeline.yaml@main
+      with:
+        project: roboshop
+        component: catalogue
+        environment: dev
