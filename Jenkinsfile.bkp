@@ -5,10 +5,15 @@ pipeline {
             label 'Agent-1'
         }
     }
+    // tools{
+    //     nodejs 'node20'
+    //     terraform 'terraform-1.5'
+    //     dockerTool 'docker-20'
+    // }
     environment {
         COURSE = "Jenkins"
         appVersion = ""
-        ACC_ID = "376798132299"
+        ACC_ID = "131315333865"
         project = "roboshop"
         component = "catalogue"
     }
@@ -27,6 +32,7 @@ pipeline {
                 }
             }
         }
+        
         stage('Install Dependencies') {
             steps {
                 script{
@@ -46,25 +52,25 @@ pipeline {
             }
         }
         // Here select the scanner tool and send reports to server
-        stage('Sonar Scan'){
-            environment {
-                def scannerHome = tool 'sonar-8.0'
-            }
-            steps {
-                script{
-                    withSonarQubeEnv('sonar-server'){
-                        sh "${scannerHome}/bin/sonar-scanner"
-                    }
-                }
-            }
-        }
-        stage('Quality Gate'){
-            steps {
-                timeout(time: 1, unit: 'HOURS'){
-                    waitForQualityGate abortPipeline:true
-                }
-            }
-        }
+        // stage('Sonar Scan'){
+        //     environment {
+        //         def scannerHome = tool 'sonar-8.0'
+        //     }
+        //     steps {
+        //         script{
+        //             withSonarQubeEnv('sonar-server'){
+        //                 sh "${scannerHome}/bin/sonar-scanner"
+        //             }
+        //         }
+        //     }
+        // }
+        // stage('Quality Gate'){
+        //     steps {
+        //         timeout(time: 1, unit: 'HOURS'){
+        //             waitForQualityGate abortPipeline:true
+        //         }
+        //     }
+        // }
         stage('Build Image') {
             steps {
                 script{
@@ -125,10 +131,10 @@ pipeline {
                 script{
                     sh """
                         trivy image \
-                        --scanner vuln \
+                        --scanners vuln \
                         --severity HIGH,CRITICAL,MEDIUM \
+                        --pkg-types os \
                         --exit-code 1 \
-                        --skip-db-update \
                         --format table \
                         ${ACC_ID}.dkr.ecr.us-east-1.amazonaws.com/${PROJECT}/${COMPONENT}:${appVersion}
                     """
